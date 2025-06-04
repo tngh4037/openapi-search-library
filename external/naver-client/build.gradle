@@ -1,0 +1,33 @@
+jar.enabled = true
+
+// FeignClient를 쓰기 위한 실제 기능 제공 (자동 설정, 인터페이스 생성, HTTP 호출 등)
+// 이것만 있으면 기본적인 기능은 제공하지만...
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+}
+
+ext {
+    set('springCloudVersion', "2025.0.0")
+}
+
+// Spring Cloud에서 사용하는 모든 라이브러리의 호환 버전을 지정해 줌 => 특정 라이브러리의 모든 하위 라이브러리 버전을 일관되게 맞추는데 도움을 준다.
+// Spring Boot와 맞지 않는 버전의 Feign, OkHttp, Jackson, Netty, 등과 충돌 나는 걸 미연에 방지
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+// [ BOM이 필요한 이유 ]
+// Spring Cloud는 Spring Boot 위에서 동작하지만, Spring Boot가 자동으로 관리하지 않는 라이브러리들이 있다.
+// 예를 들어,
+//  - Feign 내부적으로 사용되는 okhttp3, jackson, spring-cloud-commons 등의 버전
+// 따라서 Feign이 Spring Boot 3.2에서 작동하려면 정확한 버전 매칭이 필요.
+// 이걸 안 해주면, 예를 들어 다음 같은 문제가 생길 수 있다.
+//  - NoSuchMethodError, ClassNotFoundException, Bean 주입 실패 등등
+//
+// # 결론
+//  - feign 사용시 둘 다 해주는게 좋다.
+//    - spring-cloud-starter-openfeign(기능 제공),
+//    - spring-cloud-dependencies BOM (버전 관리, 충돌 방지)
+// # 설정 방법: https://spring.io/projects/spring-cloud
