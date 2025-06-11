@@ -30,6 +30,10 @@ subprojects {
 		// spock
 		testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0'
 		testImplementation 'org.spockframework:spock-spring:2.4-M4-groovy-4.0'
+
+		// lombok
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
 	}
 
 	tasks.named('test') {

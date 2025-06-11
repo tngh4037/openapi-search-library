@@ -1,5 +1,6 @@
 package com.library.feign;
 
+import com.library.NaverBookResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,9 +25,9 @@ class NaverClientTest {
     @Test
     public void callNaver() throws Exception {
         String bookName = "HTTP";
-        String response = naverClient.search(bookName, 1, 10);
+        NaverBookResponse response = naverClient.search(bookName, 1, 10);
         System.out.println("response = " + response);
-        assertThat(response).isNotEmpty();
+        assertThat(response).isNotNull();
     }
 
 }
