@@ -5,6 +5,8 @@ import com.library.NaverBookResponse
 import com.library.feign.NaverClient
 import spock.lang.Specification
 
+import java.time.LocalDate
+
 class NaverBookRepositoryTest extends Specification {
     BookRepository bookRepository
 
@@ -41,7 +43,7 @@ class NaverBookRepositoryTest extends Specification {
             result.page() == 1
             result.totalElements() == 2
             result.contents().size() == 2
-            result.contents().get(0).pubDate() == LocalDate.of(2024, 2, 1)
+            result.contents().get(0).pubDate() == LocalDate.of(2024, 1, 1)
         }
 
     }

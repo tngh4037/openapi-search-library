@@ -35,6 +35,7 @@ public class NaverErrorDecoder implements ErrorDecoder {
                     errorResponse.getErrorMessage(),
                     ErrorType.EXTERNAL_API_ERROR,
                     HttpStatus.valueOf(response.status()));
+
         } catch (IOException e) {
             log.error("[Naver] 에러 메세지 파싱 에러 code={}, request={}, methodKey={}, errorMessage={}",
                     response.status(), response.request(), methodKey, e.getMessage());
