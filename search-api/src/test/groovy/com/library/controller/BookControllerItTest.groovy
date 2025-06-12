@@ -3,7 +3,7 @@ package com.library.controller
 import com.library.controller.request.SearchRequest
 import com.library.controller.response.PageResult
 import com.library.controller.response.SearchResponse
-import com.library.service.BookQueryService
+import com.library.service.BookApplicationService
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -25,7 +25,7 @@ class BookControllerItTest extends Specification {
 
     // Spock 에서 제공하는 Mock 으로 빈등록
     @SpringBean
-    BookQueryService bookQueryService = Mock()
+    BookApplicationService bookApplicationService = Mock()
 
     // 정상인자, 잘못된 인자(3가지 요청값)
     def "정상 인자로 요청 시, 성공한다."() {
@@ -33,7 +33,7 @@ class BookControllerItTest extends Specification {
         def request = new SearchRequest(query: "HTTP", page: 1, size: 10)
 
         and:
-        bookQueryService.search(*_) >> new PageResult<>(1, 10, 10, [Mock(SearchResponse)])
+        bookApplicationService.search(*_) >> new PageResult<>(1, 10, 10, [Mock(SearchResponse)])
 
         when:
         def result = mockMvc.perform(MockMvcRequestBuilders.get("/v1/books")
