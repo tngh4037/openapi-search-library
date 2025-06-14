@@ -7,7 +7,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
+import java.time.LocalDate
+
 class BookControllerTest extends Specification {
+
     BookApplicationService bookApplicationService = Mock(BookApplicationService)
 
     BookController bookController
@@ -39,6 +42,27 @@ class BookControllerTest extends Specification {
                 assert query == givenQuery
                 assert page == givenPage
                 assert size == givenSize
+        }
+    }
+
+    def "findStat"() {
+        given:
+        def givenQuery = "HTTP"
+        def givenDate = LocalDate.of(2024, 5, 1)
+
+        when:
+        def response = mockMvc.perform(MockMvcRequestBuilders.get("/v1/books/stats?query=${givenQuery}&date=${givenDate}"))
+                .andReturn()
+                .response
+
+        then:
+        response.status == HttpStatus.OK.value()
+
+        and:
+        1 * bookApplicationService.findQueryCount(*_) >> {
+            String query, LocalDate date ->
+                assert query == givenQuery
+                assert date == givenDate
         }
     }
 

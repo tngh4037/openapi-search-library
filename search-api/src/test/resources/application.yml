@@ -2,6 +2,10 @@ spring:
   config:
     activate:
       on-profile: test
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
 
 external:
   naver:
