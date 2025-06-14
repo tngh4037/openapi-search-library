@@ -12,17 +12,20 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class BookQueryService {
 
-    @Qualifier("naverBookRepository")
     private final BookRepository naverBookRepository;
-
-    @Qualifier("kakaoBookRepository")
     private final BookRepository kakaoBookRepository;
 
-    @CircuitBreaker(name = "naverSearch", fallbackMethod = "searchFallBack")
+    public BookQueryService(@Qualifier("naverBookRepository") BookRepository naverBookRepository,
+                            @Qualifier("kakaoBookRepository") BookRepository kakaoBookRepository) {
+        this.naverBookRepository = naverBookRepository;
+        this.kakaoBookRepository = kakaoBookRepository;
+    }
+
+    @CircuitBreaker(name = "naverSearch", fallbackMethod = "searchFallback")
     public PageResult<SearchResponse> search(String query, int page, int size) {
+        log.info("[BookQueryService] naver query={}, page={}, size={}", query, page, size);
         return naverBookRepository.search(query, page, size);
     }
 

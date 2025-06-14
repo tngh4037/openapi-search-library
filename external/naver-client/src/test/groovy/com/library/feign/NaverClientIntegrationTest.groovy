@@ -1,6 +1,6 @@
 package com.library.feign
 
-import org.springframework.beans.factory.annotation.Autowire
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
@@ -10,9 +10,9 @@ import spock.lang.Ignore
 import spock.lang.Specification
 
 @Ignore
-@SpringBootTest(classes = NaverClientSpockTest.TestConfig.class)
+@SpringBootTest(classes = NaverClientIntegrationTest.TestConfig.class)
 @ActiveProfiles("test")
-class NaverClientSpockTest extends Specification {
+class NaverClientIntegrationTest extends Specification {
 
     @EnableAutoConfiguration
     @EnableFeignClients(clients = NaverClient.class)

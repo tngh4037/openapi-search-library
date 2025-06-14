@@ -1,12 +1,12 @@
-jar.enabled = true
+//jar.enabled = true
 
 // FeignClient를 쓰기 위한 실제 기능 제공 (자동 설정, 인터페이스 생성, HTTP 호출 등)
 // 이것만 있으면 기본적인 기능은 제공하지만...
-dependencies {
-    implementation project(':common') // common 사용
-    //implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    api 'org.springframework.cloud:spring-cloud-starter-openfeign' // naver-client 모듈을 사용하는 다른 모듈에서도 사용할 수 있도록  ( 참고로 api 를 사용하려면, java-library 플러그인 필요. 최상위에 추가해두었다. )
-}
+//dependencies {
+//    implementation project(':common') // common 사용
+//    //implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//    api 'org.springframework.cloud:spring-cloud-starter-openfeign' // naver-client 모듈을 사용하는 다른 모듈에서도 사용할 수 있도록  ( 참고로 api 를 사용하려면, java-library 플러그인 필요. 최상위에 추가해두었다. )
+//}
 
 
 
