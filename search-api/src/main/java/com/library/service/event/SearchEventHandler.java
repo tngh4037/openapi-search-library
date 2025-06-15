@@ -19,13 +19,13 @@ public class SearchEventHandler {
     @Async // 다른 스레드에서 동작
     @EventListener
     public void handleEvent(SearchEvent searchEvent) {
-
+/*
         try {
             Thread.sleep(5000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
+*/
         log.info("[SearchEventHandler] handleEvent: {}", searchEvent);
         DailyStat dailyStat = new DailyStat(searchEvent.query(), searchEvent.timestamp());
         dailyStatCommandService.save(dailyStat);
